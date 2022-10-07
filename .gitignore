@@ -31,3 +31,6 @@ dist-ssr
 
 # Python generated data, i.e. cache
 __pycache__/
+
+# Generated Data
+*.json
