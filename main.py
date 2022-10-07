@@ -6,8 +6,8 @@ from prices.save import save_data
 
 def main():
     config()
-    data = generate_prices(20)
-    save_data(data)
+    
+    save_data( generate_prices() )
 
 
 if __name__ == '__main__':
