@@ -1,19 +1,11 @@
+from os import getenv
 from random import randrange, uniform
 from faker import Faker
 
 from prices.platforms import PLATFORMS
 
 
-def generate_prices(
-    min_entries_per_platform: int = 0,
-    max_entries_per_platform: int = None
-) -> list[dict]:
-    if ( not max_entries_per_platform ):
-        max_entries_per_platform = min_entries_per_platform
-    
-    if ( min_entries_per_platform > max_entries_per_platform):
-        raise ValueError("'max_entries_per_platform' MUST be greater or equal to the 'min_entries_per_platform'")
-
+def generate_prices() -> list[dict]:
     fake = Faker('en_US')
 
     return [
@@ -24,6 +16,26 @@ def generate_prices(
             'timestamp': fake.date_time_this_decade(before_now = True).isoformat()
 
         }
-        for _ in range( randrange(min_entries_per_platform, max_entries_per_platform + 1) )
+        for _ in range( _get_randrange() )
         for platform in PLATFORMS
     ]
+
+
+#-------------------------- Private Functions --------------------------#
+def _get_randrange() -> int:
+    return randrange(
+        int( getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') ),
+        _get_maximum_range()
+    )
+
+
+def _get_maximum_range() -> int:
+    '''
+    Either returns:
+        - MAX
+        - MIN + 1, if MAX is absent
+    '''
+    if (not getenv('MAX_NUMBER_OF_ENTRIES_PER_PLATFORM')):
+        return int( getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') ) + 1
+    
+    return int( getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') )
