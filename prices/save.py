@@ -8,4 +8,8 @@ def save_data(data: list[dict]) -> None:
         file = Path(getenv('OUTPUT_DIRECTORY')) / Path(getenv('OUTPUT_FILENAME')),
         mode = 'w'
     ) as fout:
-        json.dump(data, fout)
+        json.dump(
+            obj    = data, 
+            fp     = fout,
+            indent = 4
+        )
