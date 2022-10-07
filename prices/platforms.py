@@ -1,4 +1,4 @@
-PLATFORMS = [
+PLATFORMS: list[str] = [
     'eBay',
     'APMEX',
     'JM Bullion'
