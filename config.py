@@ -29,7 +29,10 @@ def _check_env_variables() -> None:
 
 def _check_variable_types() -> None:
     '''
-    Checks the type of all 
+    Checks the type of all
+        - MIN -> Integer
+        - MAX -> Integer, if present
+        - MAX -> MIN <= MAX, if MAX is present
     '''
     if ( not getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM').isdigit() ):
         raise ValueError("'MIN_NUMBER_OF_ENTRIES_PER_PLATFORM' MUST be non-negative")
@@ -53,6 +56,9 @@ def _check_variable_types() -> None:
 
 
 def _is_max_present() -> bool:
+    '''
+    Checks if MAX is an Environment variable and has a value
+    '''
     return ( getenv('MAX_NUMBER_OF_ENTRIES_PER_PLATFORM') )
 
 
