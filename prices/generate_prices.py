@@ -7,7 +7,7 @@ from prices.platforms import PLATFORMS
 def generate_prices(
     min_entries_per_platform: int = 0,
     max_entries_per_platform: int = None
-) -> list(dict):
+) -> list[dict]:
     if ( not max_entries_per_platform ):
         max_entries_per_platform = min_entries_per_platform
     
@@ -24,6 +24,6 @@ def generate_prices(
             'timestamp': fake.date_time_this_decade(before_now = True)
 
         }
-        for _ in randrange(min_entries_per_platform, max_entries_per_platform + 1)
+        for _ in range( randrange(min_entries_per_platform, max_entries_per_platform + 1) )
         for platform in PLATFORMS
     ]
