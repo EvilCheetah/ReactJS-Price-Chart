@@ -3,27 +3,51 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-def config():
+def config() -> None:
     load_dotenv()
 
     _check_env_variables()
+    _check_variable_types()
     _create_necessary_directories()
 
 
 #-------------------------- Private Functions --------------------------#
 
-def _check_env_variables():
+def _check_env_variables() -> None:
     '''
-    Checks presence of all env variables
+    Checks presence of all necessary env variables
     '''
     if ( not getenv('OUTPUT_DIRECTORY') ):
         raise ValueError("You didn't specify 'OUTPUT_DIRECTORY' in .env file")
 
     if ( not getenv('OUTPUT_FILENAME') ):
         raise ValueError("You didn't specify 'OUTPUT_FILENAME' in .env file")
+    
+    if ( not getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') ):
+        raise ValueError("You didn't specify 'MIN_NUMBER_OF_ENTRIES_PER_PLATFORM' in .env file")
+    
 
+def _check_variable_types() -> None:
+    '''
+    Checks the type of all 
+    '''
+    if ( not getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM').isdigit() ):
+        raise ValueError("'MIN_NUMBER_OF_ENTRIES_PER_PLATFORM' MUST be non-negative")
+    
+    if ( not getenv('MAX_NUMBER_OF_ENTRIES_PER_PLATFORM').isdigit() ):
+        raise ValueError("'MAX_NUMBER_OF_ENTRIES_PER_PLATFORM' MUST be non-negative")
+    
+    if (
+        int(getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM')) > int(getenv('MAX_NUMBER_OF_ENTRIES_PER_PLATFORM'))
+    ):
+        raise ValueError(
+            "'MAX_NUMBER_OF_ENTRIES_PER_PLATFORM' "
+            "MUST greater or equal(>=) to "
+            "'MIN_NUMBER_OF_ENTRIES_PER_PLATFORM'"
+        )
+    
 
-def _create_necessary_directories():
+def _create_necessary_directories() -> None:
     '''
     Creates 'OUTPUT_DIRECTORY' in case it doesn't exist
     '''
