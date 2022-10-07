@@ -28,3 +28,6 @@ dist-ssr
 
 # Secrets
 .env
+
+# Python generated data, i.e. cache
+__pycache__/
