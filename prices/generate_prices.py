@@ -1,11 +1,12 @@
 from os import getenv
-from random import randrange, uniform
 from faker import Faker
+from random import randrange, uniform
 
-from prices.platforms import PLATFORMS
+from prices.constant.platforms import PLATFORMS
+from prices.types.price_entry import PriceEntry
 
 
-def generate_prices() -> list[dict]:
+def generate_prices() -> list[PriceEntry]:
     fake = Faker('en_US')
 
     return [
