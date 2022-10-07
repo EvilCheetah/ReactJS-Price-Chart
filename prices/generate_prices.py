@@ -36,6 +36,8 @@ def _get_maximum_range() -> int:
         - MIN + 1, if MAX is absent
     '''
     if (not getenv('MAX_NUMBER_OF_ENTRIES_PER_PLATFORM')):
-        return int( getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') ) + 1
+        return (
+            int( getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') ) + 1
+        )
     
-    return int( getenv('MIN_NUMBER_OF_ENTRIES_PER_PLATFORM') )
+    return int( getenv('MAX_NUMBER_OF_ENTRIES_PER_PLATFORM') )
