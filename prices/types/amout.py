@@ -1,0 +1,1 @@
+Amount = float
