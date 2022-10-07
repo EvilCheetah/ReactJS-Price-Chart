@@ -21,7 +21,7 @@ def generate_prices(
             'id':        fake.uuid4(),
             'platform':  platform,
             'amount':    round( uniform(20.00, 200.00), 2),
-            'timestamp': fake.date_time_this_decade(before_now = True)
+            'timestamp': fake.date_time_this_decade(before_now = True).isoformat()
 
         }
         for _ in range( randrange(min_entries_per_platform, max_entries_per_platform + 1) )
